@@ -52,7 +52,7 @@ public class App {
       sc.nextLine();
       exitBool = sc.nextLine();
     }
-    // 5. 종료를 알리기
+    // 5. 종료
     System.out.println("종료되었습니다.");
   }
 }

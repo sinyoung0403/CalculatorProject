@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Calculator {
 
   // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
-  private List<Number> resultList = new ArrayList<Number>();
+  private List<Number> resultList = new ArrayList<>();
 
   // Lv2 에서는 정수값만을 받기를 원함
   private int num01;

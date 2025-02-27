@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class App {
   public static void main(String[] args) {
     Calculator calculator = new Calculator();
+    // 초기화.
+    calculator.setNum(0,0);
     boolean exit = false;
     while (!exit) {
       Output.printStepDivider();
@@ -16,7 +18,7 @@ public class App {
       int secondInt = Input.getIntSc("두 번째 숫자를 입력하세요. : ");
       calculator.setNum(firstInt,secondInt);
 
-      // 기호 입력 받기.
+      // 기호 입력 받기
       char symbol = Input.getCharSc("사칙연산 기호를 입력하세요. : ");
 
       // 연산 결과를 calculator 에서 실행하기
@@ -24,7 +26,7 @@ public class App {
       Output.printOutput("결과 값: "+calculator.calculate(symbol));
       Output.printLineDivider();
 
-      // 값의 삭제 및 추가 여부 받기.
+      // 값의 삭제 및 추가 여부 받기
       Output.printOutput("현재 저장되어 있는 값: " + calculator.getResultList() );
       String deleteString = Input.getStringSc("( 엔터 입력 시 스킵 | D 입력 시 가장 먼저 저장된 값 삭제)");
 

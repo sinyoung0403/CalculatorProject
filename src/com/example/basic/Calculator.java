@@ -8,10 +8,11 @@ import java.util.Objects;
 
 
 public class Calculator {
+
   // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
-  // 속성 정의 > 인터페이스 리스트 형태로 받는게 낫다.
   private List<Number> resultList = new ArrayList<Number>();
-  // Lv2 에서는 정수값만을 받기를 원함.
+
+  // Lv2 에서는 정수값만을 받기를 원함
   private int num01;
   private int num02;
   Number result;
@@ -26,7 +27,7 @@ public class Calculator {
     return List.of(num01, num02);
   }
 
-  // Setter 함수. 입력값 바꾸기.
+  // Setter 함수. 입력값 바꾸기
   public void setNum(int num01, int num02) {
     this.num01 = num01;
     this.num02 = num02;
@@ -58,7 +59,7 @@ public class Calculator {
     }
   }
 
-  // 값 저장 클래스
+  // 값 저장하는 기능
   public Number calculate(char symbol) {
     switch (symbol) {
       case '+':

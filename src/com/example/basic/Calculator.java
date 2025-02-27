@@ -1,5 +1,7 @@
 package com.example.basic;
 
+import com.example.basic.io.output.Output;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,11 +10,11 @@ import java.util.Objects;
 public class Calculator {
   // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
   // 속성 정의 > 인터페이스 리스트 형태로 받는게 낫다.
-  private List<Object> resultList = new ArrayList<Object>();;
+  private List<Number> resultList = new ArrayList<Number>();;
   Number result;
 
   // Getter 함수. List 접근 가능
-  public List<Object> getResultList() {
+  public List<Number> getResultList() {
     return this.resultList;
   }
 
@@ -37,8 +39,7 @@ public class Calculator {
   // 값을 나누는 함수
   double divide(int val1, int val2){
     if (val2 == 0){
-      System.out.println("분모는 0이 되면 안됩니다.");
-      return 0;
+      throw new IllegalArgumentException("분모는 0이 될 수 없습니다.");
     }
     else {
       return (double)val1 / (double) val2;
@@ -46,22 +47,22 @@ public class Calculator {
   }
 
   // 값 저장 클래스
-  public Number calculate(int firstInt, int secondInt, String symbol) {
+  public Number calculate(int firstInt, int secondInt, char symbol) {
     switch (symbol) {
-      case "+":
+      case '+':
         result = sum(firstInt, secondInt);
         break;
-      case "-":
+      case '-':
         result = subtract(firstInt, secondInt);
         break;
-      case "/":
+      case '/':
         result = divide(firstInt, secondInt);
         break;
-      case "*":
+      case '*':
         result = multiply(firstInt, secondInt);
         break;
       default:
-        System.out.println("잘못입력하였습니다.");
+        throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
     }
     resultList.add(result);
     return result;
@@ -69,9 +70,9 @@ public class Calculator {
 
   // 값을 삭제하는 기능
   public void removeResult() {
-    System.out.println("가장 최근에 저장된 값 ["+resultList.get(resultList.size()-1) + "] 을 삭제합니다. ");
-    resultList.remove(resultList.size()-1);
-    System.out.println("현재 저장된 값: "+resultList);
+    Output.printOutput("가장 먼저 저장된 값인 ["+resultList.get(0) + "] 을 삭제합니다. ");
+    resultList.remove(0);
+    Output.printOutput("현재 저장된 값: "+resultList);
   }
 }
 

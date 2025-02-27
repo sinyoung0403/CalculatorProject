@@ -50,7 +50,7 @@ public class Calculator {
   }
 
   // 값을 나누는 함수
-  double divide(){
+  public Number divide(){
     if (this.num02 == 0){
       throw new IllegalArgumentException("분모는 0이 될 수 없습니다.");
     }

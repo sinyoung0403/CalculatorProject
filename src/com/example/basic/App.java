@@ -15,7 +15,7 @@ public class App {
       int firstInt = Input.getIntSc("첫 번째 숫자를 입력하세요. : ");
       int secondInt = Input.getIntSc("두 번째 숫자를 입력하세요. : ");
 
-      // 기호를 받을 때는 공백을 제거해주었다.
+      // 기호 입력 받기.
       char symbol = Input.getCharSc("사칙연산 기호를 입력하세요. : ");
 
       // 연산 결과를 calculator 에서 실행하기

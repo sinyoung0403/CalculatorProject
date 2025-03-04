@@ -1,37 +1,50 @@
-package com.example.swing;
+package com.example.swing.swingui;
+import com.example.swing.logic.CalculatorState;
+import com.example.swing.buttonListener.DeleteBtnClickListener;
 import com.example.swing.buttonListener.InputBtnClickListener;
 import com.example.swing.buttonListener.SymbolBtnClickListener;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.*;
 
 
 public class SwingUI extends JFrame {
   public static JFrame frame;
   public static JLabel stateLabel;
+  public static JLabel myList;
 
   public SwingUI(){
+    CalculatorState calculatorState = new CalculatorState();
+
     // 프레임 생성
     frame = new JFrame("계산기");
 
     // 프레임 설정
-    frame.setSize(310, 540);
+    frame.setSize(440, 540);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
 
-    // 패널 만들기 > 패널이 있으니까 바로 생기네.
+    // 패널 만들기
     JPanel panel = new JPanel();
     frame.add(panel);
 
-    stateLabel = new JLabel("저장값");
+    // 라벨 선언
+    stateLabel = new JLabel("계산과정");
     stateLabel.setBounds(10,0,300,50);
     frame.add(stateLabel);
 
-    JLabel presentLabel = new JLabel("입력해주세요.");
+    JLabel presentLabel = new JLabel("계산을 입력해주세요.");
     presentLabel.setBounds(10,60,300,60);
     frame.add(presentLabel);
+
+    // 저장된 List 선언
+    JLabel myListLabel= new JLabel("저장된 값");
+    myListLabel.setBounds(310,0,80,30);
+    frame.add(myListLabel);
+
+    // 값을 표시하기
+    myList= new JLabel("");
+    myList.setBounds(300,20,120,540);
+    frame.add(myList);
 
     // 주의 해야할 부분 ! 실제 DataState 에는 +-*/ 로 값을 넣어 뒀다는 것 !!!
     JButton sumBtn = new JButton("➕");
@@ -99,9 +112,10 @@ public class SwingUI extends JFrame {
     backBtn.setBounds(220, 360, 60, 60);
     frame.add(backBtn);
 
-    JButton expBtn = new JButton("X²");
-    expBtn.setBounds(10, 430, 60, 60);
-    frame.add(expBtn);
+    JButton maxDelBtn = new JButton("<html>MAX<br>DEL</html>");
+    maxDelBtn.setFont(maxDelBtn.getFont().deriveFont(10.0f));
+    maxDelBtn.setBounds(10, 430, 60, 60);
+    frame.add(maxDelBtn);
 
     JButton btn0 = new JButton("0");
     btn0.setBounds(80, 430, 60, 60);
@@ -115,6 +129,7 @@ public class SwingUI extends JFrame {
     equalBtn.setBounds(220, 430, 60, 60);
     frame.add(equalBtn);
 
+    // 숫자 버튼에 Click Listener 적용
     InputBtnClickListener inputBtnClickListener = new InputBtnClickListener(frame,presentLabel);
     btn1.addActionListener(inputBtnClickListener);
     btn2.addActionListener(inputBtnClickListener);
@@ -128,13 +143,20 @@ public class SwingUI extends JFrame {
     btn0.addActionListener(inputBtnClickListener);
     pointBtn.addActionListener(inputBtnClickListener);
 
-    CalculatorState calculatorState = new CalculatorState();
-    SymbolBtnClickListener symbolBtnClickListener = new SymbolBtnClickListener(frame,stateLabel, presentLabel, calculatorState);
+    // 연산 버튼에 Click Listener 적용
+    SymbolBtnClickListener symbolBtnClickListener = new SymbolBtnClickListener(stateLabel, presentLabel, calculatorState);
     equalBtn.addActionListener(symbolBtnClickListener);
     sumBtn.addActionListener(symbolBtnClickListener);
     subtractBtn.addActionListener(symbolBtnClickListener);
     multiplyBtn.addActionListener(symbolBtnClickListener);
     divideBtn.addActionListener(symbolBtnClickListener);
+
+    // 값을 지우는 버튼들은 deleteBtnClickListener 적용
+    DeleteBtnClickListener deleteBtnClickListener = new DeleteBtnClickListener(stateLabel,presentLabel);
+    backBtn.addActionListener(deleteBtnClickListener);
+    ceBtn.addActionListener(deleteBtnClickListener);
+    cBtn.addActionListener(deleteBtnClickListener);
+    maxDelBtn.addActionListener(deleteBtnClickListener);
 
 
     frame.setLayout(null);

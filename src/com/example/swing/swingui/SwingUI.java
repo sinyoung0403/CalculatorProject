@@ -46,6 +46,10 @@ public class SwingUI extends JFrame {
     myList.setBounds(300,20,120,540);
     frame.add(myList);
 
+    JButton delBtn = new JButton("Delete");
+    delBtn.setBounds(300, 430, 100, 60);
+    frame.add(delBtn);
+
     // 주의 해야할 부분 ! 실제 DataState 에는 +-*/ 로 값을 넣어 뒀다는 것 !!!
     JButton sumBtn = new JButton("➕");
     sumBtn.setBounds(10, 150, 60, 60);
@@ -157,7 +161,7 @@ public class SwingUI extends JFrame {
     ceBtn.addActionListener(deleteBtnClickListener);
     cBtn.addActionListener(deleteBtnClickListener);
     maxDelBtn.addActionListener(deleteBtnClickListener);
-
+    delBtn.addActionListener(deleteBtnClickListener);
 
     frame.setLayout(null);
     frame.setVisible(true); //화면에 프레임 출력

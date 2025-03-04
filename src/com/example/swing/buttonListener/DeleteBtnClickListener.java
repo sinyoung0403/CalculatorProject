@@ -99,6 +99,20 @@ public class DeleteBtnClickListener implements ActionListener {
         }
 
       }
+      else if (buttonText.equals("Delete")) {
+        List<Double> saveList = cs.getSaveResultList();
+        if(saveList.isEmpty()){
+          SwingOutput.showErrorDialog("저장 값이 없는 상태에서 누를 수 없습니다.");
+        }
+        else{
+          cs.removeSaveList(0);
+          // 저장값 재출력
+          String textList = (String) cs.getSaveList()
+                  .stream().reduce("",(s1,s2) -> s1+"<br>"+s2+"<br>");
+          SwingUI.myList.setText("<html>"+textList+"</html>");
+        }
+      }
+
     }
 
   }

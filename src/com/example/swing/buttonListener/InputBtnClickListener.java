@@ -1,8 +1,7 @@
 package com.example.swing.buttonListener;
 
-import com.example.swing.CalculatorState;
-import com.example.swing.Calculators;
-import com.example.swing.SwingOutput;
+import com.example.swing.logic.CalculatorState;
+import com.example.swing.swingui.SwingOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

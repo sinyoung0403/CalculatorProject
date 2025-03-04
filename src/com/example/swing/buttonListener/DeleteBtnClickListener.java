@@ -52,7 +52,7 @@ public class DeleteBtnClickListener implements ActionListener {
 
       }
       // 초기화 버튼 클릭
-      else if (buttonText.equals("CE")) {
+      else if (buttonText.equals("C")) {
         // 전부 다 초기화
         cs.clearInputNumber();
         cs.clearCalculatorList();
@@ -64,7 +64,7 @@ public class DeleteBtnClickListener implements ActionListener {
         cs.insertLabel(presentLabel,inputText);
       }
       // Input 값만 비우기
-      else if (buttonText.equals("C")) {
+      else if (buttonText.equals("CE")) {
         cs.clearInputNumber();
         String inputText = cs.getInputString();
         cs.insertLabel(presentLabel,inputText);

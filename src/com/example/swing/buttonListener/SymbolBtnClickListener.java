@@ -91,7 +91,7 @@ public class SymbolBtnClickListener implements ActionListener {
         String symbol = (String) cs.getCalculatorList().get(1);
         calc.setCalculate(symbol);
         calc.setNum(num1, num2);
-        Double result = calc.calculate();
+        Double result = calc.ArithmeticCalculator();
 
         // 결과 저장
         String setText = num1 +" "+ symbol + " "+ num2 + "  =" + result;
@@ -156,7 +156,7 @@ public class SymbolBtnClickListener implements ActionListener {
       String symbol = (String) cs.getCalculatorList().get(1);
       calc.setCalculate(symbol);
       calc.setNum(num1, num2);
-      Double result = calc.calculate();
+      Double result = calc.ArithmeticCalculator();
 
 
       // 값을 초기화해준 후 stepText 수정

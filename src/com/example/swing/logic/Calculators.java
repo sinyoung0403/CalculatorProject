@@ -26,7 +26,7 @@ public class Calculators {
   private operatorMode mode = operatorMode.normal;
 
   /* 기능 정의*/
-  public double calculate(){
+  public double ArithmeticCalculator(){
     switch (mode){
       case sum:
         return num1 + num2;

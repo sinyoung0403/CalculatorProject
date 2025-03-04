@@ -1,6 +1,6 @@
-package com.example.swing;
+package com.example.swing.logic;
 
-import java.nio.DoubleBuffer;
+import com.example.swing.swingui.SwingOutput;
 
 public class Calculators {
 
@@ -26,7 +26,6 @@ public class Calculators {
   private operatorMode mode = operatorMode.normal;
 
   /* 기능 정의*/
-  // 값을 더하는 함수
   public double calculate(){
     switch (mode){
       case sum:
@@ -37,6 +36,7 @@ public class Calculators {
         return num1 * num2;
       case divide:
         if (num2 == 0){
+          SwingOutput.showErrorDialog("0은 나눌 수 없습니다.");
           throw new ArithmeticException("0은 나눌 수 없습니다.");
         }
         else{

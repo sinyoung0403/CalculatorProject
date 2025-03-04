@@ -1,10 +1,20 @@
 package com.example.swing;
+import com.example.swing.buttonListener.InputBtnClickListener;
+import com.example.swing.buttonListener.SymbolBtnClickListener;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 
 public class SwingUI extends JFrame {
+  public static JFrame frame;
+  public static JLabel stateLabel;
+
   public SwingUI(){
     // 프레임 생성
-    JFrame frame = new JFrame("계산기");
+    frame = new JFrame("계산기");
 
     // 프레임 설정
     frame.setSize(310, 540);
@@ -15,10 +25,15 @@ public class SwingUI extends JFrame {
     JPanel panel = new JPanel();
     frame.add(panel);
 
-    JLabel label = new JLabel("입력해주세요.");
-    label.setBounds(10,0,300,150);
-    frame.add(label);
+    stateLabel = new JLabel("저장값");
+    stateLabel.setBounds(10,0,300,50);
+    frame.add(stateLabel);
 
+    JLabel presentLabel = new JLabel("입력해주세요.");
+    presentLabel.setBounds(10,60,300,60);
+    frame.add(presentLabel);
+
+    // 주의 해야할 부분 ! 실제 DataState 에는 +-*/ 로 값을 넣어 뒀다는 것 !!!
     JButton sumBtn = new JButton("➕");
     sumBtn.setBounds(10, 150, 60, 60);
     frame.add(sumBtn);
@@ -27,7 +42,7 @@ public class SwingUI extends JFrame {
     subtractBtn.setBounds(80, 150, 60, 60);
     frame.add(subtractBtn);
 
-    JButton multiplyBtn = new JButton("✖");
+    JButton multiplyBtn = new JButton("*");
     multiplyBtn.setBounds(150, 150, 60, 60);
     frame.add(multiplyBtn);
 
@@ -71,6 +86,7 @@ public class SwingUI extends JFrame {
     btn1.setBounds(10, 360, 60, 60);
     frame.add(btn1);
 
+
     JButton btn2 = new JButton("2");
     btn2.setBounds(80, 360, 60, 60);
     frame.add(btn2);
@@ -99,12 +115,29 @@ public class SwingUI extends JFrame {
     equalBtn.setBounds(220, 430, 60, 60);
     frame.add(equalBtn);
 
+    InputBtnClickListener inputBtnClickListener = new InputBtnClickListener(frame,presentLabel);
+    btn1.addActionListener(inputBtnClickListener);
+    btn2.addActionListener(inputBtnClickListener);
+    btn3.addActionListener(inputBtnClickListener);
+    btn4.addActionListener(inputBtnClickListener);
+    btn5.addActionListener(inputBtnClickListener);
+    btn6.addActionListener(inputBtnClickListener);
+    btn7.addActionListener(inputBtnClickListener);
+    btn8.addActionListener(inputBtnClickListener);
+    btn9.addActionListener(inputBtnClickListener);
+    btn0.addActionListener(inputBtnClickListener);
+    pointBtn.addActionListener(inputBtnClickListener);
+
+    CalculatorState calculatorState = new CalculatorState();
+    SymbolBtnClickListener symbolBtnClickListener = new SymbolBtnClickListener(frame,stateLabel, presentLabel, calculatorState);
+    equalBtn.addActionListener(symbolBtnClickListener);
+    sumBtn.addActionListener(symbolBtnClickListener);
+    subtractBtn.addActionListener(symbolBtnClickListener);
+    multiplyBtn.addActionListener(symbolBtnClickListener);
+    divideBtn.addActionListener(symbolBtnClickListener);
+
 
     frame.setLayout(null);
     frame.setVisible(true); //화면에 프레임 출력
-  }
-
-  public static void main(String[] args) {
-    SwingUI swing = new SwingUI();
   }
 }

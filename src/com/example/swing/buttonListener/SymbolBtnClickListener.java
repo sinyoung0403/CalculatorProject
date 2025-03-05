@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class SymbolBtnClickListener implements ActionListener {
-
   // 속성 정의
   JLabel stateLabel;
   JLabel presentLabel;
@@ -60,28 +59,20 @@ public class SymbolBtnClickListener implements ActionListener {
     // 받아온 값이 비어있을 경우 오류 메시지 출력
     if (stringNumber.isEmpty()) {
       SwingOutput.showErrorDialog("숫자를 입력하신 후에 [ = ] 를 눌러주세요. [ = ]은 계산 결과 값을 초기화합니다.");
-    }
-    // input 란이 비어있지 않다면?
-    else{
+    } else{ // input 란이 비어있지 않다면?
       // Calculator List 가 비어있는 경우 새로운 값 추가
       if (cs.getCalculatorList().isEmpty()) {
         cs.addCalculatorList(Double.valueOf(stringNumber));
         cs.stepString = stringNumber;
         stateLabel.setText(cs.getStepText());
         presentLabel.setText(cs.getInputString());
-      }
-
-      // Calculator List 에 숫자만 있을 경우
-      else if (cs.getCalculatorList().size() == 1) {
+      } else if (cs.getCalculatorList().size() == 1) { // Calculator List 에 숫자만 있을 경우
         stringNumber = cs.getInputString();
         cs.setCalculatorList(Double.valueOf(stringNumber));
         cs.stepString = stringNumber;
         stateLabel.setText(cs.getStepText());
         presentLabel.setText(cs.getInputString());
-      }
-
-      // Calculator List 에 숫자와 기호가 있을 경우
-      else {
+      } else { // Calculator List 에 숫자와 기호가 있을 경우
         // 값을 수정했을 경우를 위하여 값을 받아와 재저장
         cs.addCalculatorList(Double.valueOf(stringNumber));
         cs.clearInputNumber();
@@ -124,19 +115,13 @@ public class SymbolBtnClickListener implements ActionListener {
     // 받아온 값이 비어있을 경우 오류 메시지 출력
     if(stringNumber.isEmpty()){
       SwingOutput.showErrorDialog("숫자를 입력하신 후에 [ "+text+" ] 를 눌러주세요.");
-    }
-
-    // Calculator List 가 비어 있을 경우
-    else if(cs.getCalculatorList().isEmpty()){
+    } else if(cs.getCalculatorList().isEmpty()){ // Calculator List 가 비어 있을 경우
       cs.addCalculatorList(Double.valueOf(stringNumber));
       cs.addCalculatorList(text);
       cs.stepString = cs.getCalculatorList().stream().map(Object::toString).reduce("", (s1, s2) -> s1 + s2);
       stateLabel.setText(cs.getStepText());
       cs.clearInputNumber();
-    }
-
-    // Calculator List 에 숫자만 있을 경우
-    else if(cs.getCalculatorList().size() ==1){
+    } else if(cs.getCalculatorList().size() ==1){ // Calculator List 에 숫자만 있을 경우
       stringNumber = cs.getInputString();
       cs.setCalculatorList(Double.valueOf(stringNumber));
       cs.addCalculatorList(text);
@@ -144,10 +129,7 @@ public class SymbolBtnClickListener implements ActionListener {
       cs.stepString = cs.getCalculatorList().stream().map(Object::toString).reduce("", (s1, s2) -> s1 + s2);
       stateLabel.setText(cs.getStepText());
       presentLabel.setText(cs.getInputString());
-    }
-
-    // Calculator List 에 숫자와 기호가 있을 경우
-    else{
+    } else{ // Calculator List 에 숫자와 기호가 있을 경우
       // 값을 수정했을 경우를 위하여 값을 받아와 재저장
       cs.addCalculatorList(Double.valueOf(stringNumber));
       cs.clearInputNumber();
@@ -159,7 +141,6 @@ public class SymbolBtnClickListener implements ActionListener {
       Calculators.OperatorMode convertSymbol = Calculators.OperatorMode.convertSymbol(symbol);
       calc.setNum(num1, num2);
       Double result = calc.ArithmeticCalculator(convertSymbol);
-
 
       // 값을 초기화해준 후 stepText 수정
       String setText = num1 +" "+ symbol + " "+ num2 + "  =" + result;

@@ -1,13 +1,13 @@
 | 🔢 Calculator Project 🔣 |  
 |:------------------------:|
-|            사진            |
+|<img src="https://github.com/user-attachments/assets/f24f2217-714a-47e4-ad91-12d2f883802c" alt="image" width="300">|
 
 <br>
 
-## 🎫 구현된 사진
+## 🎫 구현된 프로젝트
+<img src="https://github.com/user-attachments/assets/4031e8dc-43fb-448e-bd55-2bdb86960eb6" width="400">
+  <br>
 
-- 사칙연산이 가능합니다.
-- 저장된 결과 값을 확인할 수 있습니다.
   <br>
   <br>
 

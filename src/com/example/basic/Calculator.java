@@ -1,85 +1,92 @@
 package com.example.basic;
 
 import com.example.basic.io.output.Output;
+import com.example.swing.swingui.SwingOutput;
 
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
-public class Calculator {
-
+public class Calculator<T extends Number> {
   // 연산 결과를 저장하는 컬렉션 타입 필드 선언 및 생성
-  private List<Number> resultList = new ArrayList<>();
+  private static List<Number> resultList = new ArrayList<>();
 
-  // Lv2 에서는 정수값만을 받기를 원함
-  private int num01;
-  private int num02;
-  Number result;
+  // 제네릭 멤버변수 선언
+  T num01;
+  T num02;
+  // return 값 줄 때 T에 맞는 type 을 줄려고 미리 등록.
+  private Class<T> type;
 
-  // Getter 함수. List 접근 가능
-  public List<Number> getResultList() {
-    return this.resultList;
-  }
-
-  // Getter 함수. 기존 입력 값 가져오기
-  public List<Number> getNum() {
-    return List.of(num01, num02);
-  }
-
-  // Setter 함수. 입력값 바꾸기
-  public void setNum(int num01, int num02) {
+  // 생성자로 멤버변수 초기화 하기
+  Calculator(T num01, T num02){
     this.num01 = num01;
     this.num02 = num02;
   }
 
-  /* 기능 정의*/
-  // 값을 더하는 함수
-  public Number sum(){
-    return this.num01 + this.num02;
-  }
+  public enum OperatorType{
+    PLUS((a, b) -> a.doubleValue() + b.doubleValue()),
+    MINUS((a, b) -> a.doubleValue() - b.doubleValue()),
+    MULTIPLY((a, b) -> a.doubleValue() * b.doubleValue()),
+    DIVIDE((a, b) -> a.doubleValue() / b.doubleValue());
 
-  // 값을 빼는 함수
-  public Number subtract(){
-    return this.num01 - this.num02;
-  }
+    private final OperatorFunction operatorFunction;
 
-  // 값을 곱하는 함수
-  public Number multiply(){
-    return this.num01 * this.num02;
-  }
-
-  // 값을 나누는 함수
-  public Number divide(){
-    if (this.num02 == 0){
-      throw new IllegalArgumentException("분모는 0이 될 수 없습니다.");
+    // 생성자
+    OperatorType(OperatorFunction operatorFunction){
+      this.operatorFunction = operatorFunction;
     }
-    else {
-      return (double)num01 / (double) num02;
+    // 계산 메서드
+    public Double apply(Number a, Number b){
+      return this.operatorFunction.apply(a,b);
     }
+  }
+  // 람다식을 사용하기 위한 함수형 인터페이스
+  public interface OperatorFunction{
+    double apply(Number a, Number b);
   }
 
   // 값 저장하는 기능
-  public Number calculate(char symbol) {
+  public double calculate(char symbol) {
+    double result;
     switch (symbol) {
       case '+':
-        result = sum();
+        result = OperatorType.PLUS.apply(num01,num02);
         break;
       case '-':
-        result = subtract();
+        result = OperatorType.MINUS.apply(num01,num02);
         break;
       case '/':
-        result = divide();
-        break;
+        if(num02.doubleValue() == 0){
+          throw new ArithmeticException("두 번째 숫자가 0이면 안됩니다.");
+        } else {
+          result = OperatorType.DIVIDE.apply(num01,num02);
+          break;
+        }
       case '*':
-        result = multiply();
+        result = OperatorType.MULTIPLY.apply(num01,num02);
         break;
       default:
         throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
     }
-    resultList.add(result);
     return result;
   }
+
+  /* getter start */
+  // getter 함수
+  public String getResultList(){
+    return resultList.stream().map(String::valueOf).reduce((s1,s2)-> s1+", "+s2).orElse("");
+  }
+
+  /* setter start*/
+  // 값을 추가해주는 함수
+  public void addResultList(Double value){
+    resultList.add(value);
+  }
+
 
   // 값을 삭제하는 기능
   public void removeResult() {
@@ -87,5 +94,18 @@ public class Calculator {
     resultList.remove(0);
     Output.printOutput("현재 저장된 값: "+resultList);
   }
+
+  // scanner로 입력 받은 값보다 큰 결과 값들을 출력
+  public void selectBigResultList(Integer num){
+    // 값을 받을 시, 해당 값보다 큰 값들을 stream 을 통해서 filter 작업
+    List<Number> bigResultList = resultList.stream()
+            .filter(n-> n.doubleValue() > num.doubleValue())
+            .collect(Collectors.toList());
+    // 해당 리스트를 stream을 이용하여 리스트로 만들어 주기
+    String bigResultListStr = bigResultList.stream().map(String::valueOf)
+            .reduce((s1,s2) -> s1 + ", "+ s2).orElse("");
+    Output.printOutput(num + " 보다 큰 결과값 : [ " + bigResultListStr+" ] ");
+  }
+
 }
 

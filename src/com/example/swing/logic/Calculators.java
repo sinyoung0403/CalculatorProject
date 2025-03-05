@@ -50,7 +50,6 @@ public class Calculators<T extends Number> {
 
   // Int 면 Integer로 반환
   private T toType(BigDecimal result){
-
     // 타입이 만일 null 일 경우, 기본타입으로 주기
     if (type == null) {
       type = (Class<T>) Double.class;
@@ -93,8 +92,6 @@ public class Calculators<T extends Number> {
           result = toBigDecimal(num1).divide(toBigDecimal(num2), RoundingMode.HALF_UP);
           break;
         }
-//      default: //
-//        throw new ArithmeticException("이상한타입");
     }
     return toType(result);
   }

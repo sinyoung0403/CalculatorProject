@@ -1,10 +1,11 @@
 package com.example.swing.swingui;
+import com.example.swing.buttonListener.ButtonFunctionListener;
 import com.example.swing.logic.CalculatorState;
-import com.example.swing.buttonListener.DeleteBtnClickListener;
 import com.example.swing.buttonListener.InputBtnClickListener;
 import com.example.swing.buttonListener.SymbolBtnClickListener;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class SwingUI extends JFrame {
@@ -19,7 +20,7 @@ public class SwingUI extends JFrame {
     frame = new JFrame("계산기");
 
     // 프레임 설정
-    frame.setSize(440, 540);
+    frame.setSize(460, 540);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
 
@@ -43,12 +44,16 @@ public class SwingUI extends JFrame {
 
     // 값을 표시하기
     myList= new JLabel("");
-    myList.setBounds(300,20,120,540);
+    myList.setBounds(300,10,120,450);
     frame.add(myList);
 
-    JButton delBtn = new JButton("Delete");
-    delBtn.setBounds(300, 430, 100, 60);
+    JButton delBtn = new JButton("Del");
+    delBtn.setBounds(370, 430, 60, 60);
     frame.add(delBtn);
+
+    JButton viewBtn = new JButton("Big");
+    viewBtn.setBounds(300, 430, 60, 60);
+    frame.add(viewBtn);
 
     // 주의 해야할 부분 ! 실제 DataState 에는 +-*/ 로 값을 넣어 뒀다는 것 !!!
     JButton sumBtn = new JButton("➕");
@@ -116,10 +121,11 @@ public class SwingUI extends JFrame {
     backBtn.setBounds(220, 360, 60, 60);
     frame.add(backBtn);
 
-    JButton maxDelBtn = new JButton("<html>MAX<br>DEL</html>");
-    maxDelBtn.setFont(maxDelBtn.getFont().deriveFont(10.0f));
-    maxDelBtn.setBounds(10, 430, 60, 60);
-    frame.add(maxDelBtn);
+    JButton negativeBtn = new JButton("Negative");
+    negativeBtn.setMargin(new Insets(0, 0, 0, 0));
+    negativeBtn.setFont(negativeBtn.getFont().deriveFont(10.0f));
+    negativeBtn.setBounds(10, 430, 60, 60);
+    frame.add(negativeBtn);
 
     JButton btn0 = new JButton("0");
     btn0.setBounds(80, 430, 60, 60);
@@ -156,12 +162,13 @@ public class SwingUI extends JFrame {
     divideBtn.addActionListener(symbolBtnClickListener);
 
     // 값을 지우는 버튼들은 deleteBtnClickListener 적용
-    DeleteBtnClickListener deleteBtnClickListener = new DeleteBtnClickListener(stateLabel,presentLabel);
+    ButtonFunctionListener deleteBtnClickListener = new ButtonFunctionListener(stateLabel,presentLabel);
     backBtn.addActionListener(deleteBtnClickListener);
     ceBtn.addActionListener(deleteBtnClickListener);
     cBtn.addActionListener(deleteBtnClickListener);
-    maxDelBtn.addActionListener(deleteBtnClickListener);
+    viewBtn.addActionListener(deleteBtnClickListener);
     delBtn.addActionListener(deleteBtnClickListener);
+    negativeBtn.addActionListener(deleteBtnClickListener);
 
     frame.setLayout(null);
     frame.setVisible(true); //화면에 프레임 출력

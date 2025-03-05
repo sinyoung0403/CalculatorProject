@@ -1,5 +1,6 @@
 package com.example.swing.buttonListener;
 
+import com.example.basic.Calculator;
 import com.example.swing.logic.CalculatorState;
 import com.example.swing.logic.Calculators;
 import com.example.swing.swingui.SwingOutput;
@@ -53,7 +54,7 @@ public class SymbolBtnClickListener implements ActionListener {
   }
 
   public void equalBtnListener(){
-    Calculators calc = new Calculators();
+    Calculators<Double> calc = new Calculators<>();
     String stringNumber = cs.getInputString();
 
     // 받아온 값이 비어있을 경우 오류 메시지 출력
@@ -89,14 +90,15 @@ public class SymbolBtnClickListener implements ActionListener {
         Double num1 = (Double) cs.getCalculatorList().get(0);
         Double num2 = (Double) cs.getCalculatorList().get(2);
         String symbol = (String) cs.getCalculatorList().get(1);
-        calc.setCalculate(symbol);
+        Calculators.OperatorMode convertSymbol = Calculators.OperatorMode.convertSymbol(symbol);
         calc.setNum(num1, num2);
-        Double result = calc.ArithmeticCalculator();
+        Double result = calc.ArithmeticCalculator(convertSymbol);
 
         // 결과 저장
         String setText = num1 +" "+ symbol + " "+ num2 + "  =" + result;
         cs.stepString = setText;
-        cs.addSaveList(setText,result);
+        cs.addSaveList(setText);
+        cs.addSvaeResultList(result);
         stateLabel.setText(setText);
         presentLabel.setText(result.toString());
 
@@ -116,7 +118,7 @@ public class SymbolBtnClickListener implements ActionListener {
 
   // 산술 연산 버튼 클릭 시
   public void arithmeticBtnListener(String text) {
-    Calculators calc = new Calculators();
+    Calculators<Double> calc = new Calculators<>();
     String stringNumber = cs.getInputString();
 
     // 받아온 값이 비어있을 경우 오류 메시지 출력
@@ -154,16 +156,17 @@ public class SymbolBtnClickListener implements ActionListener {
       Double num1 = (Double) cs.getCalculatorList().get(0);
       Double num2 = (Double) cs.getCalculatorList().get(2);
       String symbol = (String) cs.getCalculatorList().get(1);
-      calc.setCalculate(symbol);
+      Calculators.OperatorMode convertSymbol = Calculators.OperatorMode.convertSymbol(symbol);
       calc.setNum(num1, num2);
-      Double result = calc.ArithmeticCalculator();
+      Double result = calc.ArithmeticCalculator(convertSymbol);
 
 
       // 값을 초기화해준 후 stepText 수정
       String setText = num1 +" "+ symbol + " "+ num2 + "  =" + result;
       presentLabel.setText(result.toString());
       cs.stepString = setText;
-      cs.addSaveList(setText,result);
+      cs.addSaveList(setText);
+      cs.addSvaeResultList(result);
       stateLabel.setText(setText);
       cs.setInputNumber(result.toString());
 

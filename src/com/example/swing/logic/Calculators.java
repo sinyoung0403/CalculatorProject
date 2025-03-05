@@ -2,71 +2,100 @@ package com.example.swing.logic;
 
 import com.example.swing.swingui.SwingOutput;
 
-public class Calculators {
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class Calculators<T extends Number> {
+  // 속성 정의
+  private T num1, num2;
+  // T가 어떤 타입인지 타입이라는 변수에 정의
+
+  // return 값 줄때 T에 맞는 type 으로 줄려고. 미리 등록을 해두는 것.
+  private Class<T> type;
 
   // enum 으로 선언
-  public enum operatorMode {
-    normal, sum, subtract, multiply, divide
-  }
-  // 속성 정의
-  private Double num1, num2;
+  public enum OperatorMode {
+    SUM("+"),
+    SUBTRACT("-"),
+    MULTIPLY("*"),
+    DIVIDE("/");
 
-  // 0 으로 초기화 해두기.
-  public Calculators(){
-    num1 = 0.0;
-    num2 = 0.0;
+
+    private final String symbol;
+
+
+    OperatorMode(String symbol){
+      this.symbol = symbol;
+    }
+    public static OperatorMode convertSymbol(String symbol){
+      // OperatorMode 안에 symbol 을 가진 애가 있느냐.
+      for (OperatorMode operatorMode: values()){
+        if(operatorMode.symbol.equals(symbol)){
+          return operatorMode;
+        }
+      }
+      throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
+    }
   }
 
-  public void setNum(Double num1, Double num2) {
+  // Double 로 받지말고 T로 받자.
+  public void setNum(T num1, T num2) {
     this.num1 = num1;
     this.num2 = num2;
   }
 
-  // 이게 값을 설정하지 않았을 때 nomal 로 해두면 초기상태가 된다네.
-  private operatorMode mode = operatorMode.normal;
+  private BigDecimal toBigDecimal(T number){
+    return new BigDecimal(number.toString());
+  }
+
+  // Int 면 Integer로 반환
+  private T toType(BigDecimal result){
+
+    // 타입이 만일 null 일 경우, 기본타입으로 주기
+    if (type == null) {
+      type = (Class<T>) Double.class;
+    }
+    if(type == Integer.class){
+      return type.cast(result.intValue());
+    } else if (type == Double.class) {
+      return type.cast(result.doubleValue());
+    }
+    throw new IllegalStateException("Type is not initialized");
+  }
+
+
 
   /* 기능 정의*/
-  public double ArithmeticCalculator(){
+  // 제네릭으로 반환값 설정 ?  BigDecimal 숫자계의 king ? 꺽세 있으면 파라미터, 꺽세없으면 반환.
+  // BigDecimal이 가장 정확한 숫자. >
+  public T ArithmeticCalculator(OperatorMode mode){
+    CalculatorState cs = new CalculatorState();
+    BigDecimal result = null;
     switch (mode){
-      case sum:
-        return num1 + num2;
-      case subtract:
-        return num1 - num2;
-      case multiply:
-        return num1 * num2;
-      case divide:
-        if (num2 == 0){
+      case SUM:
+        result = toBigDecimal(num1).add(toBigDecimal(num2));
+        break;
+      case SUBTRACT:
+        result = toBigDecimal(num1).subtract(toBigDecimal(num2));
+        break;
+      case MULTIPLY:
+        result = toBigDecimal(num1).multiply(toBigDecimal(num2));
+        break;
+      case DIVIDE:
+        // 괄호안에 있는 값이랑 일치하면 0, 크면 1, 작으면 -1 0 이면
+        if (toBigDecimal(num2).compareTo(BigDecimal.ZERO) == 0){
+          cs.clearInputNumber();
+          cs.removeCalculatorListDiv();
           SwingOutput.showErrorDialog("0은 나눌 수 없습니다.");
           throw new ArithmeticException("0은 나눌 수 없습니다.");
         }
         else{
-          return num1/ num2;
+          result = toBigDecimal(num1).divide(toBigDecimal(num2), RoundingMode.HALF_UP);
+          break;
         }
-      case normal:
-        return num2;
-      default:
-        return 0;
+//      default: //
+//        throw new ArithmeticException("이상한타입");
     }
-  }
-
-
-  // 기호에 달리 연산 수행
-  public void setCalculate(String symbol) {
-    switch (symbol) {
-      case "+":
-        mode = operatorMode.sum;
-        break;
-      case "-":
-        mode = operatorMode.subtract;
-        break;
-      case "/":
-        mode = operatorMode.divide;
-        break;
-      case "*":
-        mode = operatorMode.multiply;
-        break;
-      default:
-        throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
-    }
+    return toType(result);
   }
 }

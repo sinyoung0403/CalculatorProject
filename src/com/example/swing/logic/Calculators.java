@@ -84,7 +84,8 @@ public class Calculators<T extends Number> {
         // 괄호안에 있는 값이랑 일치하면 0, 크면 1, 작으면 -1 0 이면
         if (toBigDecimal(num2).compareTo(BigDecimal.ZERO) == 0){
           cs.clearInputNumber();
-          cs.removeCalculatorListDiv();
+          cs.clearStepText();
+          cs.clearCalculatorList();
           SwingOutput.showErrorDialog("0은 나눌 수 없습니다.");
           throw new ArithmeticException("0은 나눌 수 없습니다.");
         }

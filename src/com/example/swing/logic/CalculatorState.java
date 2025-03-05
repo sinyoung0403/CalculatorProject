@@ -50,9 +50,6 @@ public class CalculatorState{
     calculatorList.add(number);
   }
 
-  public void removeCalculatorListDiv(){
-    calculatorList.remove(2);
-  }
   /* Setter Finish */
 
   /* Getter Start */
@@ -102,9 +99,11 @@ public class CalculatorState{
   public void removeSaveList(int number){
     saveList.remove(number);
   }
+
   public void removeSaveResultList(int number){
     saveResultList.remove(number);
   }
+
   /* remove method finish */
 
   /* Label edit */

@@ -6,7 +6,7 @@
 ---
 
 ## 🎫 구현된 프로젝트
-<img src="https://github.com/user-attachments/assets/4031e8dc-43fb-448e-bd55-2bdb86960eb6" width="400">
+<img src="https://github.com/user-attachments/assets/4031e8dc-43fb-448e-bd55-2bdb86960eb6" width="600">
 
 ---
 

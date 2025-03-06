@@ -46,10 +46,91 @@
 
 ## 📑 요구사항
 
-1. App 클래스의 main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 하기 (캡슐화)
+1 App 클래스의 main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 하기 (캡슐화)
 - 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현합니다. (Getter 메서드)
-- 간접 접근을 통해 필드에 접근하여 수내
+- 간접 접근을 통해 필드에 접근하여 수정할 수 있도록 구현합니다. (Setter 메서드)
+=> 
 
+2 연산 결과들 중 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현
+
+3 Enum, 제네릭, 람다 & 스트림을 이해한 계산기
+- Enum 타입을 활용하여 연산자 타입에 대한 정보를 관리하고 이를 사칙연산 계산기 ArithmeticCalculator 클래스에 활용
+
+4 double 타입의 값을 전달 받아도 연산이 수행하도록 만들기
+- 피연산자를 여러 타입으로 받을 수 있도록 기능을 확장 (제네릭)
+
+5 저장된 연산 결과들 중 Scanner로 입력받은 값보다 큰 결과값 들을 출력
+- 해당 메서드를 구현할 때 Lambda & Stream을 활용하여 구현
+
+
+---
+
+📂 CalculatorState 핵심 기능 요약
+
+1. 데이터 관리
+
+- calculatorList : 연산 대상 저장
+- stepString : 연산 과정 표시
+- inputString : 사용자 입력 값 저장
+- saveList : 전체 결과 저장
+- saveResultList : 연산 결과만 저장
+
+2. 값 설정 및 추가
+
+- add/setInputNumber(String number) : 입력값 추가/설정
+- addSaveList(String text) : 결과 저장
+- addSaveResultList(Double number) : 연산 결과 저장
+- addCalculatorList(S number) : 연산 대상 추가
+
+3. 값 조회
+
+- getInputString() / getStepText() : 입력값 & 연산 과정 조회
+- getCalculatorList() / getSaveList() / getSaveResultList() : 저장된 데이터 조회
+- getCalculatorListSize() : 연산 대상 개수 반환
+
+
+4. 값 삭제 및 초기화
+
+- clearInputNumber() / clearStepText() / clearCalculatorList() : 입력 & 과정 초기화
+- removeInputNumber() : 입력값 마지막 문자 삭제
+- removeSaveList(int index) / removeSaveResultList(int index) : 특정 저장값 삭제
+
+5. 라벨 수정
+
+- insertLabel(JLabel label, String text) : UI 라벨 업데이트
+
+--------------------
+
+📂 swingui
+
+✔ SwingUI
+
+1. UI 구성 요소
+- 프레임: 계산기 창 생성 및 설정
+- 패널: 버튼 및 레이블을 포함하는 컨테이너
+- 라벨: stateLabel (계산 과정), presentLabel (입력값), myList (저장된 값) 표시
+- 버튼:
+  - 연산 버튼: sumBtn, subtractBtn, multiplyBtn, divideBtn, equalBtn
+  - 숫자 버튼: btn0 ~ btn9, pointBtn
+  - 기타 버튼: ceBtn, cBtn, backBtn, negativeBtn, delBtn, viewBtn
+
+2. 버튼 클릭 리스너
+
+  -숫자 및 점 버튼: InputBtnClickListener → 입력값 처리
+  -연산 버튼: SymbolBtnClickListener → 연산 수행 및 계산 처리
+  -기타 버튼: ButtonFunctionListener → 지우기, 뒤로가기 등 기능 처리
+
+3. 레이아웃 설정
+
+- 프레임 크기: 460x540
+- 버튼 배치: setBounds()로 버튼 위치 및 크기 설정
+- 프레임 표시: frame.setVisible(true)로 화면에 출력
+
+✔ SwingOutput
+
+1. Error Dialog 출력
+
+2. 안내문 출력
 
 ---
 

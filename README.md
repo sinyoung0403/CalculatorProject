@@ -65,7 +65,9 @@
 
 ---
 
-📂 CalculatorState 핵심 기능 요약
+📂 
+
+✔ `CalculatorState`
 
 1. 데이터 관리
 
@@ -101,9 +103,9 @@
 
 --------------------
 
-📂 swingui
+## 📂 swingui
 
-✔ SwingUI
+✔ `SwingUI`
 
 1. UI 구성 요소
 - 프레임: 계산기 창 생성 및 설정
@@ -126,7 +128,7 @@
 - 버튼 배치: setBounds()로 버튼 위치 및 크기 설정
 - 프레임 표시: frame.setVisible(true)로 화면에 출력
 
-✔ SwingOutput
+✔ `SwingOutput`
 
 1. Error Dialog 출력
 

@@ -34,7 +34,6 @@ public class SymbolBtnClickListener implements ActionListener {
       case "=":
         equalBtnListener();
         break;
-      // 주의 해야할 부분 ! +-*/ 로 값을 넣어 뒀다는 것 !!!
       case "➕":
         arithmeticBtnListener("+");
         break;

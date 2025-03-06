@@ -22,61 +22,50 @@ public class InputBtnClickListener implements ActionListener {
     CalculatorState calculatorState = new CalculatorState();
     // 버튼일 경우만 처리
     if (e.getSource() instanceof JButton) {
-      // e 이벤트를 Jbtton 으로 캐스팅해서
+      // e 이벤트를 Jbtton 으로 캐스팅
       JButton sourceButton = (JButton) e.getSource();
-      // Jbtn 의 Text를 가져온다.
       String buttonText = sourceButton.getText();
       if(buttonText.equals("1")){
         calculatorState.addInputNumber("1");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("2")){
+      } else if(buttonText.equals("2")){
         calculatorState.addInputNumber("2");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("3")){
+      } else if(buttonText.equals("3")){
         calculatorState.addInputNumber("3");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("4")){
+      } else if(buttonText.equals("4")){
         calculatorState.addInputNumber("4");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("5")){
+      } else if(buttonText.equals("5")){
         calculatorState.addInputNumber("5");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("6")){
+      } else if(buttonText.equals("6")){
         calculatorState.addInputNumber("6");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("7")){
+      } else if(buttonText.equals("7")){
         calculatorState.addInputNumber("7");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("8")){
+      } else if(buttonText.equals("8")){
         calculatorState.addInputNumber("8");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("9")){
+      } else if(buttonText.equals("9")){
         calculatorState.addInputNumber("9");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals("0")){
+      } else if(buttonText.equals("0")){
         calculatorState.addInputNumber("0");
         String text=calculatorState.getInputString();
         calculatorState.insertLabel(label,text);
-      }
-      else if(buttonText.equals(".")){
+      } else if(buttonText.equals(".")){
         String text=calculatorState.getInputString();
         if (text.contains(".")){
           SwingOutput.showErrorDialog("소수점은 한번만 입력 가능합니다.");

@@ -103,7 +103,6 @@ public class CalculatorState{
   public void removeSaveResultList(int number){
     saveResultList.remove(number);
   }
-
   /* remove method finish */
 
   /* Label edit */

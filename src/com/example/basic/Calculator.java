@@ -18,8 +18,7 @@ public class Calculator<T extends Number> {
   // 제네릭 멤버변수 선언
   T num01;
   T num02;
-  // return 값 줄 때 T에 맞는 type 을 줄려고 미리 등록.
-  private Class<T> type;
+
 
   // 생성자로 멤버변수 초기화 하기
   Calculator(T num01, T num02){

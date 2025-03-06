@@ -62,7 +62,6 @@ public class ButtonFunctionListener implements ActionListener {
         cs.insertLabel(presentLabel,inputText);
       } else if (buttonText.equals("Big")) {  // 입력값 보다 큰 값 출력해주는 Big 버튼 클릭
         List<Double> saveList = cs.getSaveResultList();
-
         if(stringNumber.isEmpty()){
           SwingOutput.showErrorDialog("값을 입력 후 클릭해주세요.");
         } else{
@@ -70,7 +69,7 @@ public class ButtonFunctionListener implements ActionListener {
             if (saveList.isEmpty()) {
               SwingOutput.showErrorDialog("저장 값이 없는 상태에서 누를 수 없습니다.");
             } else{
-              // 현재값 보다 큰 값들을 조회 ! 이걸 스트림으로 하라했나 ? Lambda & Stream을 활용하여 구현합니다.
+              // 현재값 보다 큰 값들을 조회
               // presentValue 를 받을 수 있어야함.
               Double presentValue = Double.valueOf(stringNumber);
               List<Number> bigListValues = saveList.stream()

@@ -38,7 +38,7 @@ public class Calculators<T extends Number> {
     }
   }
 
-  // Double 로 받지말고 T로 받자.
+  // T로 받기
   public void setNum(T num1, T num2) {
     this.num1 = num1;
     this.num2 = num2;
@@ -63,10 +63,8 @@ public class Calculators<T extends Number> {
   }
 
 
-
   /* 기능 정의*/
-  // 제네릭으로 반환값 설정 ?  BigDecimal 숫자계의 king ? 꺽세 있으면 파라미터, 꺽세없으면 반환.
-  // BigDecimal이 가장 정확한 숫자. >
+  // BigDecimal 숫자로 Enum Operator 연산
   public T ArithmeticCalculator(OperatorMode mode){
     CalculatorState cs = new CalculatorState();
     BigDecimal result = null;
@@ -88,8 +86,7 @@ public class Calculators<T extends Number> {
           cs.clearCalculatorList();
           SwingOutput.showErrorDialog("0은 나눌 수 없습니다.");
           throw new ArithmeticException("0은 나눌 수 없습니다.");
-        }
-        else{
+        } else{
           result = toBigDecimal(num1).divide(toBigDecimal(num2), RoundingMode.HALF_UP);
           break;
         }
